@@ -2,10 +2,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-        ProdutoCRUD produtoCRUD = new ProdutoCRUD();  
-        CarrinhoCRUD carrinhoCRUD = new CarrinhoCRUD(); 
+        ProdutoCRUD produtoCRUD = new ProdutoCRUD();
+        CarrinhoCRUD carrinhoCRUD = new CarrinhoCRUD();
+        PedidoCRUD pedidoCRUD = new PedidoCRUD();
 
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true;
@@ -17,7 +17,7 @@ public class Main {
             System.out.println("3. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
-            scanner.nextLine();  
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -25,24 +25,20 @@ public class Main {
                     boolean clienteContinuar = true;
                     while (clienteContinuar) {
                         System.out.println("\n==== Menu Cliente ====");
-                        System.out.println("1. Me cadastrar");
-                        System.out.println("2. Ver Produtos");
-                        System.out.println("3. Adicionar Produto ao Carrinho");
+                        System.out.println("1. Ver Produtos");
+                        System.out.println("2. Adicionar Produto ao Carrinho");
+                        System.out.println("3. Remover Produto do Carrinho");
                         System.out.println("4. Ver Carrinho");
-                        System.out.println("5. Finalizar Compra");
-                        System.out.println("6. Voltar ao Menu Principal");
+                        System.out.println("5. Filtrar Produtos por Categoria");
+                        System.out.println("6. Ordenar Produtos por Preço");
+                        System.out.println("7. Finalizar Compra");
+                        System.out.println("8. Voltar ao Menu Principal");
                         System.out.print("Escolha uma opção: ");
                         int clienteOpcao = scanner.nextInt();
                         scanner.nextLine();
 
                         switch (clienteOpcao) {
                             case 1:
-                            	//cadastrarcliente
-                            	  System.out.print("Seu nome: ");
-                                  String nome = scanner.nextLine();
-                                  Cliente cliente = new Cliente(1, nome);  
-                            	break;
-                            case 2:
                                 // Ver produtos
                                 List<Produto> produtos = produtoCRUD.listarProdutos();
                                 System.out.println("==== Lista de Produtos ====");
@@ -50,17 +46,28 @@ public class Main {
                                     System.out.println(produto);
                                 }
                                 break;
-                            case 3:
+                            case 2:
                                 // Adicionar produto ao carrinho
                                 System.out.print("Digite o nome do produto que deseja adicionar: ");
                                 String produtoNome = scanner.nextLine();
                                 System.out.print("Digite a quantidade: ");
                                 int quantidade = scanner.nextInt();
-                                Produto produtoSelecionado = produtoCRUD.buscarProdutoPorNome(produtoNome);  // Método para buscar produto
+                                Produto produtoSelecionado = produtoCRUD.buscarProdutoPorNome(produtoNome); // produto
                                 if (produtoSelecionado != null) {
                                     ItemCarrinho item = new ItemCarrinho(produtoSelecionado, quantidade);
                                     carrinhoCRUD.adicionarItem(item);
                                     System.out.println("Produto adicionado ao carrinho!");
+                                } else {
+                                    System.out.println("Produto não encontrado.");
+                                }
+                                break;
+                            case 3:
+                                // Adicionar produto ao carrinho
+                                System.out.print("Digite o nome do produto que deseja remover: ");
+                                String produtoRemover = scanner.nextLine();
+                                if (produtoRemover != null) {
+                                    carrinhoCRUD.removerItem(produtoRemover);
+                                    System.out.println("Produto removido do carrinho!");
                                 } else {
                                     System.out.println("Produto não encontrado.");
                                 }
@@ -72,14 +79,31 @@ public class Main {
                                 for (ItemCarrinho item : itensCarrinho) {
                                     System.out.println(item);
                                 }
-                                System.out.println("Total: " + carrinhoCRUD.calcularTotal());
+                                System.out.println("Total: R$ " + carrinhoCRUD.calcularTotal());
                                 break;
                             case 5:
-                                // Finalizar compra
-                                System.out.println("Compra finalizada! Total: " + carrinhoCRUD.calcularTotal());
-                                carrinhoCRUD = new CarrinhoCRUD();  // Limpar carrinho após finalizar a compra
+                                System.out.print("Digite a categoria para filtrar: ");
+                                String categoriaFiltrar = scanner.nextLine();
+                                List<Produto> produtosFiltrados = produtoCRUD.filtrarPorCategoria(categoriaFiltrar);
+                                System.out.println("==== Produtos na Categoria '" + categoriaFiltrar + "' ====");
+                                for (Produto produto : produtosFiltrados) {
+                                    System.out.println(produto);
+                                }
                                 break;
                             case 6:
+                                List<Produto> produtosOrdenados = produtoCRUD.ordenarPorPreco();
+                                System.out.println("==== Produtos Ordenados por Preço ====");
+                                for (Produto produto : produtosOrdenados) {
+                                    System.out.println(produto);
+                                }
+                                break;
+                            case 7:
+                                // Finalizar compra
+                                pedidoCRUD.criarPedido(carrinhoCRUD.getCarrinho()); // Passa o Carrinho
+                                System.out.println("Compra finalizada! Total: R$ " + carrinhoCRUD.calcularTotal());
+                                carrinhoCRUD = new CarrinhoCRUD(); // Limpar carrinho após finalizar a compra
+                                break;
+                            case 8:
                                 clienteContinuar = false;
                                 break;
                             default:
@@ -87,7 +111,7 @@ public class Main {
                         }
                     }
                     break;
-                    
+
                 case 2:
                     // Menu do Gerente
                     boolean gerenteContinuar = true;
@@ -100,10 +124,11 @@ public class Main {
                         System.out.println("5. Listar Produtos");
                         System.out.println("6. Filtrar Produtos por Categoria");
                         System.out.println("7. Ordenar Produtos por Preço");
-                        System.out.println("8. Voltar ao Menu Principal");
+                        System.out.println("8. Visualizar Última Venda");
+                        System.out.println("9. Voltar ao Menu Principal");
                         System.out.print("Escolha uma opção: ");
                         int gerenteOpcao = scanner.nextInt();
-                        scanner.nextLine();  // Consumir a nova linha
+                        scanner.nextLine(); // Consumir a nova linha
 
                         switch (gerenteOpcao) {
                             case 1:
@@ -112,12 +137,12 @@ public class Main {
                                 String nome = scanner.nextLine();
                                 System.out.print("Digite o preço do produto: ");
                                 double preco = scanner.nextDouble();
-                                scanner.nextLine();  // Consumir nova linha
+                                scanner.nextLine(); // Consumir nova linha
                                 System.out.print("Digite a categoria do produto: ");
                                 String categoria = scanner.nextLine();
                                 System.out.print("Digite o estoque do produto: ");
                                 int quantidadeEstoque = scanner.nextInt();
-                                scanner.nextLine();  // Consumir nova linha
+                                scanner.nextLine(); // Consumir nova linha
                                 System.out.print("Digite a descrição do produto: ");
                                 String descricao = scanner.nextLine();
                                 Produto novoProduto = new Produto(nome, preco, quantidadeEstoque, categoria, descricao);
@@ -183,6 +208,17 @@ public class Main {
                                 break;
 
                             case 8:
+                                // Visualizar Última Venda
+                                Pedido ultimaVenda = pedidoCRUD.visualizarUltimaVenda();
+                                if (ultimaVenda == null) {
+                                    System.out.println("Ainda não foram realizadas vendas.");
+                                } else {
+                                    System.out.println("==== Última Venda Realizada ====");
+                                    System.out.println(ultimaVenda.toString());
+                                }
+                                break;
+
+                            case 9:
                                 gerenteContinuar = false;
                                 break;
 
@@ -201,7 +237,6 @@ public class Main {
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-
         scanner.close();
     }
 }
