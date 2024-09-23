@@ -9,7 +9,7 @@ public class ItemCarrinho {
         this.quantidade = quantidade;
         this.subtotal = produto.getPreco() * quantidade;  // Calcula o subtotal
     }
-
+  
     // Getters
     public Produto getProduto() {
         return produto;
