@@ -13,15 +13,19 @@ public class CarrinhoCRUD {
         calcularTotal();  
     }
  
-    public void removerItem(int produtoId) {
+    public void removerItem(String produtoNome) {
         List<ItemCarrinho> itens = carrinho.getItens();
         for (int i = 0; i < itens.size(); i++) {
-            if (itens.get(i).getProduto().getId() == produtoId) {
+            if (itens.get(i).getProduto().getNome().equals(produtoNome)) {
                 itens.remove(i); 
                 break;
             }
         }
         calcularTotal();  
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
     }
 
     public List<ItemCarrinho> listarItens() {

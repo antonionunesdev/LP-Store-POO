@@ -9,6 +9,11 @@ public class ItemCarrinho {
         this.quantidade = quantidade;
         this.subtotal = produto.getPreco() * quantidade;  // Calcula o subtotal
     }
+    
+    @Override
+    public String toString() {
+        return produto.getNome() + " - " + quantidade + " x " + produto.getPreco();
+    }
   
     // Getters
     public Produto getProduto() {
@@ -23,7 +28,7 @@ public class ItemCarrinho {
         return subtotal;
     }
 
-    // Método para atualizar o subtotal
+    // MÃ©todo para atualizar o subtotal
     public void atualizarSubtotal() {
         this.subtotal = produto.getPreco() * quantidade;
     }

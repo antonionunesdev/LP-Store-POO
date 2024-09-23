@@ -11,10 +11,10 @@ public class PedidoCRUD {
 
     // Método para criar um pedido a partir de um carrinho de compras
     public void criarPedido(Carrinho carrinho) {
-        // Gera um novo ID para o pedido
-        int novoId = pedidos.size() + 1;
+        int novoId = pedidos.size() + 1; // Gera um novo ID para o pedido
         Pedido novoPedido = new Pedido(novoId, carrinho.getItens(), carrinho.getTotal());
         pedidos.add(novoPedido); // Adiciona o pedido à lista
+        System.out.println("Pedido criado: " + novoPedido.toString());
     }
 
     // Método para listar todos os pedidos
