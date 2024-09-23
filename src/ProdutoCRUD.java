@@ -30,7 +30,15 @@ public class ProdutoCRUD {
             }
         }
     }
-
+    
+    public Produto buscarProdutoPorNome(String nome) {
+        for (Produto produto : produtos) {
+            if (produto.getNome().equals(nome)) {
+                return produto;
+            }
+        }
+        return null; 
+    }
     public void atualizarEstoqueProduto(int id, int novaQuantidadeEstoque) {
         for (Produto produto : produtos) {
             if (produto.getId() == id) {
