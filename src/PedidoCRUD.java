@@ -2,31 +2,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoCRUD {
-    private List<Pedido> pedidos; // Lista de pedidos
+    private List<Pedido> pedidos;
 
-    // Construtor para inicializar a lista de pedidos
     public PedidoCRUD() {
         this.pedidos = new ArrayList<>();
     }
 
-    // Método para criar um pedido a partir de um carrinho de compras
     public void criarPedido(Carrinho carrinho) {
-        int novoId = pedidos.size() + 1; // Gera um novo ID para o pedido
+        int novoId = pedidos.size() + 1;
         Pedido novoPedido = new Pedido(novoId, carrinho.getItens(), carrinho.getTotal());
-        pedidos.add(novoPedido); // Adiciona o pedido à lista
+        pedidos.add(novoPedido);
         System.out.println("Pedido criado: " + novoPedido.toString());
     }
 
-    // Método para listar todos os pedidos
     public List<Pedido> listarPedidos() {
         return pedidos;
     }
 
-    // Método para visualizar a última venda (último pedido)
     public Pedido visualizarUltimaVenda() {
         if (pedidos.isEmpty()) {
-            return null; // Se não há pedidos, retorna null
+            return null;
         }
-        return pedidos.get(pedidos.size() - 1); // Retorna o último pedido
+        return pedidos.get(pedidos.size() - 1);
     }
 }

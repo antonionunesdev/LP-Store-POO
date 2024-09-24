@@ -12,25 +12,44 @@ public class ProdutoCRUD {
         produtos.add(produto);
     }
 
-    public void removerProduto(int id) {
+    public boolean removerProduto(int id) {
         for (int i = produtos.size() - 1; i >= 0; i--) {
             Produto produto = produtos.get(i);
             if (produto.getId() == id) {
                 produtos.remove(i);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public void atualizarPrecoProduto(int id, double novoPreco) {
         for (Produto produto : produtos) {
             if (produto.getId() == id) {
-                produto.atualizarPreco(novoPreco);
+                produto.setPreco(novoPreco);
                 break;
             }
         }
     }
 
+    public void atualizarEstoqueProduto(int id, int novaQuantidadeEstoque) {
+        for (Produto produto : produtos) {
+            if (produto.getId() == id) {
+                produto.setEstoque(novaQuantidadeEstoque);
+                break;
+            }
+        }
+    }
+    
+    public Produto buscarProdutoPorId(int id) {
+        for (Produto produto : produtos) {
+            if (produto.getId() == id) {
+                return produto;
+            }
+        }
+        return null;
+    }
+    
     public Produto buscarProdutoPorNome(String nome) {
         for (Produto produto : produtos) {
             if (produto.getNome().equals(nome)) {
@@ -38,15 +57,6 @@ public class ProdutoCRUD {
             }
         }
         return null;
-    }
-
-    public void atualizarEstoqueProduto(int id, int novaQuantidadeEstoque) {
-        for (Produto produto : produtos) {
-            if (produto.getId() == id) {
-                produto.atualizarEstoque(novaQuantidadeEstoque);
-                break;
-            }
-        }
     }
 
     public List<Produto> listarProdutos() {
