@@ -4,12 +4,10 @@ public class Carrinho {
     private List<ItemCarrinho> itens;  
     private double total;  
 
-    
     public Carrinho(List<ItemCarrinho> itens) {
         this.itens = itens;
         this.total = 0.0;
     }
-
 
     public List<ItemCarrinho> getItens() {
         return itens;

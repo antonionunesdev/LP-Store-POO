@@ -2,10 +2,9 @@ import java.util.List;
 
 public class Pedido {
     private int id;
-    private List<ItemCarrinho> itens; // Itens do pedido
+    private List<ItemCarrinho> itens;
     private double valorTotal;
 
-    // Construtor
     public Pedido(int id, List<ItemCarrinho> itens, double valorTotal) {
         this.id = id;
         this.itens = itens;
@@ -22,18 +21,5 @@ public class Pedido {
             stringTotal.append(item.toString()).append("\n");
         }
         return stringTotal.toString();
-    }
-
-    // Getters
-    public int getId() {
-        return id;
-    }
-
-    public List<ItemCarrinho> getItens() {
-        return itens;
-    }
-
-    public double getValorTotal() {
-        return valorTotal;
     }
 }

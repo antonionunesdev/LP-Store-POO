@@ -7,15 +7,6 @@ public class Produto {
     private String descricao;
     private String categoria;
 
-    // public Produto(String nome, double preco, String categoria) {
-    // this.id = contadorId++;
-    // this.nome = nome;
-    // this.preco = preco;
-    // this.categoria = categoria;
-    // this.quantidadeEstoque = 0;
-    // this.descricao = "";
-    // }
-
     public Produto(String nome, double preco, int quantidadeEstoque, String categoria, String descricao) {
         this.id = contadorId++;
         this.nome = nome;
@@ -27,19 +18,11 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto ID: " + id + ", Nome: " + nome + ", Preço: R$ " + preco +
+        return "ID do Produto: " + id + ", Nome: " + nome + ", Preço: R$ " + preco +
                 ", Categoria: " + categoria + ", Estoque: " + quantidadeEstoque +
                 ", Descrição: " + descricao;
     }
-
-    public void atualizarPreco(double novoPreco) {
-        this.preco = novoPreco;
-    }
-
-    public void atualizarEstoque(int novaQuantidadeEstoque) {
-        this.quantidadeEstoque = novaQuantidadeEstoque;
-    }
-
+    
     public int getId() {
         return id;
     }
@@ -56,11 +39,19 @@ public class Produto {
         return categoria;
     }
 
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+    
     public String getDescricao() {
         return descricao;
     }
 
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
+    public void setPreco(double novoPreco) {
+        this.preco = novoPreco;
+    }
+
+    public void setEstoque(int novaQuantidadeEstoque) {
+        this.quantidadeEstoque = novaQuantidadeEstoque;
     }
 }

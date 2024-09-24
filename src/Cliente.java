@@ -1,29 +1,27 @@
-
 public class Cliente {
-   int id;
-   String nome;
-   
-   
-   public Cliente(int id, String nome) {
-	   this.id = id;
-	   this.nome = nome;
-   }
-   
-   public void atualizarDadosCliente (String NovoNome){
-	   this.nome = NovoNome;
-   }
-   
-   public void exibirDadosCliente() {
-       System.out.println("ID: " + id);
-       System.out.println("Nome: " + nome);
-   }
+    private static int contadorId = 1;
+    private int id;
+    private String nome;
+    
+    public Cliente(String nome) {
+        this.id = contadorId++;
+        this.nome = nome;
+    }
 
-   public int getId() {
-       return id;
-   }
+    public int getId() {
+        return id;
+    }
 
-   public String getNome() {
-       return nome;
-   }
-   
+    public String getNome() {
+        return nome;
+    }
+    
+    public void atualizarDadosCliente(String novoNome) {
+        this.nome = novoNome;
+    }
+    
+    public void exibirDadosCliente() {
+        System.out.println("ID: " + id);
+        System.out.println("Nome: " + nome);
+    }
 }
