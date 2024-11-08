@@ -1,15 +1,15 @@
-public class Produto {
-    private static int contadorId = 1;
-    private int id;
+package pacoteDeNegocios;
+
+public class Produto extends ProdutoBase {
+    private static int contadorId = 1;  // Contador de IDs para os produtos
     private int quantidadeEstoque;
     private double preco;
-    private String nome;
-    private String descricao;
     private String categoria;
+    private String descricao;
 
+    // Construtor do Produto, agora chama o construtor da classe Item
     public Produto(String nome, double preco, int quantidadeEstoque, String categoria, String descricao) {
-        this.id = contadorId++;
-        this.nome = nome;
+        super(contadorId++, nome);  // Chama o construtor da classe Item, que define id e nome
         this.preco = preco;
         this.categoria = categoria;
         this.quantidadeEstoque = quantidadeEstoque;
@@ -18,19 +18,12 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "ID do Produto: " + id + ", Nome: " + nome + ", Preço: R$ " + preco +
+        return super.toString() + ", Preço: R$ " + preco +
                 ", Categoria: " + categoria + ", Estoque: " + quantidadeEstoque +
                 ", Descrição: " + descricao;
     }
-    
-    public int getId() {
-        return id;
-    }
 
-    public String getNome() {
-        return nome;
-    }
-
+    // Métodos getters e setters
     public double getPreco() {
         return preco;
     }
@@ -42,7 +35,7 @@ public class Produto {
     public int getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }

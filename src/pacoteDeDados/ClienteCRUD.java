@@ -1,5 +1,8 @@
+package pacoteDeDados;
+
 import java.util.ArrayList;
 import java.util.List;
+import pacoteDeNegocios.Cliente;
 
 public class ClienteCRUD {
     private List<Cliente> listaClientes;

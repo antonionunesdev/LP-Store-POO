@@ -1,5 +1,9 @@
+package pacoteDeDados;
+
 import java.util.ArrayList;
 import java.util.List;
+import pacoteDeNegocios.Carrinho;
+import pacoteDeNegocios.Pedido;
 
 public class PedidoCRUD {
     private List<Pedido> pedidos;
@@ -10,7 +14,7 @@ public class PedidoCRUD {
 
     public void criarPedido(Carrinho carrinho) {
         int novoId = pedidos.size() + 1;
-        Pedido novoPedido = new Pedido(novoId, carrinho.getItens(), carrinho.getTotal());
+        Pedido novoPedido = new Pedido(novoId, carrinho.getItens(), carrinho.getValorTotal());
         pedidos.add(novoPedido);
         System.out.println("Pedido criado: " + novoPedido.toString());
     }

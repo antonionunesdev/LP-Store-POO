@@ -1,5 +1,8 @@
-import java.util.List;
+package pacoteDeDados;
+
 import java.util.ArrayList;
+import java.util.List;
+import pacoteDeNegocios.Produto;
 
 public class ProdutoCRUD {
     private List<Produto> produtos;

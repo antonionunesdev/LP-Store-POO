@@ -1,18 +1,18 @@
+package pacoteDeNegocios;
+
 import java.util.List;
 
-public class Pedido {
+public class Pedido extends Compra {
     private int id;
-    private List<ItemCarrinho> itens;
-    private double valorTotal;
 
     public Pedido(int id, List<ItemCarrinho> itens, double valorTotal) {
+        super(itens);
         this.id = id;
-        this.itens = itens;
         this.valorTotal = valorTotal;
     }
 
     @Override
-    public String toString() { 
+    public String toString() {
         StringBuilder stringTotal = new StringBuilder();
         stringTotal.append("ID do Pedido: ").append(id).append("\n");
         stringTotal.append("Valor Total: R$ ").append(valorTotal).append("\n");
