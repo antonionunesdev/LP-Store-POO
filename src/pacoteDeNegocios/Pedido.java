@@ -3,7 +3,7 @@ package pacoteDeNegocios;
 import java.util.List;
 
 public class Pedido extends Compra {
-    private int id;
+    private final int id;
 
     public Pedido(int id, List<ItemCarrinho> itens, double valorTotal) {
         super(itens);

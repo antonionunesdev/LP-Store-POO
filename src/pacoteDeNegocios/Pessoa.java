@@ -1,6 +1,6 @@
 package pacoteDeNegocios;
 
-public class Pessoa {
+public abstract class Pessoa {
     protected static int contadorId = 1;
     protected int id;
     protected String nome;
@@ -18,9 +18,5 @@ public class Pessoa {
         return nome;
     }
 
-    public void exibirDados() {
-        System.out.println("Último usuário logado:");
-        System.out.println("ID: " + id);
-        System.out.println("Nome: " + nome);
-    }
+    public abstract String exibirDados();
 }

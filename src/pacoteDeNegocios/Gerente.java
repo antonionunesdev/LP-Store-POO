@@ -6,8 +6,7 @@ public class Gerente extends Pessoa {
     }
 
     @Override
-    public void exibirDados() {
-        System.out.println("ID do gerente: " + id);
-        System.out.println("Nome do gerente: " + nome);
+    public String exibirDados() {
+        return "Nome do gerente: " + nome + "\nID do gerente: " + id;
     }
 }

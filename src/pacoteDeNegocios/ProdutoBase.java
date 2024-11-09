@@ -1,10 +1,9 @@
 package pacoteDeNegocios;
 
 public class ProdutoBase {
-    protected int id;  // ID do item
-    protected String nome;  // Nome do item
+    protected int id;  
+    protected String nome;  
 
-    // Construtor genérico para itens
     public ProdutoBase(int id, String nome) {
         this.id = id;
         this.nome = nome;

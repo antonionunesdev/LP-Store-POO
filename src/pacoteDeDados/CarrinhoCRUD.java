@@ -6,7 +6,7 @@ import pacoteDeNegocios.Carrinho;
 import pacoteDeNegocios.ItemCarrinho;
 
 public class CarrinhoCRUD {
-    private Carrinho carrinho;
+    private final Carrinho carrinho;
 
     public CarrinhoCRUD() {
         this.carrinho = new Carrinho(new ArrayList<>());
@@ -18,7 +18,7 @@ public class CarrinhoCRUD {
 
     public void adicionarItem(ItemCarrinho item) {
         carrinho.getItens().add(item);
-        calcularTotal();  // Atualiza o total após adicionar um item
+        calcularTotal();
     }
 
     public boolean removerItem(String produtoNome) {
@@ -26,13 +26,14 @@ public class CarrinhoCRUD {
         for (int i = 0; i < itens.size(); i++) {
             if (itens.get(i).getProduto().getNome().equals(produtoNome)) {
                 itens.remove(i);
-                calcularTotal();  // Atualiza o total após remover um item
+                calcularTotal();
                 return true;
             }
         }
         return false;
     }
 
+    /* 
     public boolean verificarItem(String produtoNome) {
         for (ItemCarrinho item : carrinho.getItens()) {
             if (item.getProduto().getNome().equals(produtoNome)) {
@@ -41,6 +42,7 @@ public class CarrinhoCRUD {
         }
         return false;
     }
+    */
 
     public List<ItemCarrinho> listarItens() {
         return carrinho.getItens();
@@ -51,7 +53,7 @@ public class CarrinhoCRUD {
         for (ItemCarrinho item : carrinho.getItens()) {
             total += item.getSubtotal();
         }
-        carrinho.setValorTotal(total);  // Atualiza o valor total herdado de Compra
+        carrinho.setValorTotal(total);
         return total;
     }
 }

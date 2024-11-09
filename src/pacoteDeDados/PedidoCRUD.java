@@ -6,21 +6,17 @@ import pacoteDeNegocios.Carrinho;
 import pacoteDeNegocios.Pedido;
 
 public class PedidoCRUD {
-    private List<Pedido> pedidos;
+    private final List<Pedido> pedidos;
 
     public PedidoCRUD() {
         this.pedidos = new ArrayList<>();
     }
 
-    public void criarPedido(Carrinho carrinho) {
+    public Pedido criarPedido(Carrinho carrinho) {
         int novoId = pedidos.size() + 1;
         Pedido novoPedido = new Pedido(novoId, carrinho.getItens(), carrinho.getValorTotal());
         pedidos.add(novoPedido);
-        System.out.println("Pedido criado: " + novoPedido.toString());
-    }
-
-    public List<Pedido> listarPedidos() {
-        return pedidos;
+        return novoPedido;
     }
 
     public Pedido visualizarUltimaVenda() {
@@ -28,5 +24,9 @@ public class PedidoCRUD {
             return null;
         }
         return pedidos.get(pedidos.size() - 1);
+    }
+
+    public List<Pedido> listarPedidos() {
+        return pedidos;
     }
 }
