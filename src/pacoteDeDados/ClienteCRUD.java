@@ -11,8 +11,8 @@ public class ClienteCRUD {
         this.listaClientes = new ArrayList<>();
     }
 
-    public void cadastrarCliente(String nome) {
-        Cliente cliente = new Cliente(nome);
+    public void cadastrarCliente(String nome, String senha) {
+        Cliente cliente = new Cliente(nome, senha);
         listaClientes.add(cliente);
     }
 

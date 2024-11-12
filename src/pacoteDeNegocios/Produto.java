@@ -40,7 +40,7 @@ public class Produto extends ProdutoBase {
         this.preco = novoPreco;
     }
 
-    public void setEstoque(int novaQuantidadeEstoque) {
+    public void setQuantidadeEstoque(int novaQuantidadeEstoque) {
         this.quantidadeEstoque = novaQuantidadeEstoque;
     }
 }

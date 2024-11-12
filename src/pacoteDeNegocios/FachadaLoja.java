@@ -20,8 +20,8 @@ public class FachadaLoja {
     }
 
     // Operações relacionadas ao cliente
-    public Cliente cadastrarCliente(String nome) {
-        clienteCRUD.cadastrarCliente(nome);
+    public Cliente cadastrarCliente(String nome, String senha) {
+        clienteCRUD.cadastrarCliente(nome, senha);
         return clienteCRUD.listarClientes().get(clienteCRUD.listarClientes().size() - 1);
     }
 
@@ -101,9 +101,9 @@ public class FachadaLoja {
         if (produtos.isEmpty()) {
             return "\nNão há produtos disponíveis.";
         } else {
-            StringBuilder resultado = new StringBuilder("\n==== Lista de Produtos ====\n");
+            StringBuilder resultado = new StringBuilder("\n==== Lista de Produtos ====");
             for (Produto produto : produtos) {
-                resultado.append(produto).append("\n");
+                resultado.append("\n").append(produto);
             }
             return resultado.toString();
         }        
@@ -113,14 +113,12 @@ public class FachadaLoja {
         if (listarItens().isEmpty()) {
             throw new Exception("\nO carrinho está vazio. Adicione produtos antes de finalizar a compra.");
         } else {
+            carrinhoCRUD.atualizarValorTotal();
+
             Pedido novoPedido = criarPedido();
-            System.out.println("Pedido criado:\n" + novoPedido);
-            System.out.println("Compra finalizada por " + clienteAtual.getNome() + ". Total: R$ " + calcularTotal());
-            for (ItemCarrinho item : listarItens()) {
-                Produto produto = item.getProduto();
-                int quantidadeComprada = item.getQuantidade();
-                produtoCRUD.atualizarEstoqueProduto(produto.getId(), produto.getQuantidadeEstoque() - quantidadeComprada);
-            }
+            System.out.println("\n====Pedido criado====\n" + novoPedido);
+            System.out.println("Compra finalizada por " + clienteAtual.getNome() + ".\nTotal: R$ " + calcularTotal());
+            
             carrinhoCRUD = new CarrinhoCRUD();
         }
     }
@@ -128,13 +126,25 @@ public class FachadaLoja {
     // Operações relacionadas ao carrinho
     public String adicionarItem(String nomeProduto, int quantidade) {
         Produto produto = produtoCRUD.buscarProdutoPorNome(nomeProduto);
+        
         if (produto == null) {
             return "\nProduto não encontrado.";
-        } else {
-            ItemCarrinho item = new ItemCarrinho(produto, quantidade);
-            carrinhoCRUD.adicionarItem(item);
-            return "\nProduto adicionado ao carrinho!";
         }
+        if (quantidade > produto.getQuantidadeEstoque()) {
+            return "\nQuantidade solicitada excede o estoque disponível. Temos apenas " + produto.getQuantidadeEstoque() + " unidades disponíveis.";
+        }
+        
+        ItemCarrinho itemExistente = carrinhoCRUD.buscarItemPorProduto(produto);
+        if (itemExistente != null) {
+            itemExistente.setQuantidade(itemExistente.getQuantidade() + quantidade);
+        } else {
+            ItemCarrinho novoItem = new ItemCarrinho(produto, quantidade);
+            carrinhoCRUD.adicionarItem(novoItem);
+        }
+        
+        produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - quantidade);
+        carrinhoCRUD.atualizarValorTotal();
+        return "\nProduto adicionado ao carrinho!";
     }
 
     public String removerItem(String nomeProduto) {
@@ -159,6 +169,8 @@ public class FachadaLoja {
         if (itensCarrinho.isEmpty()) {
             return "\nO carrinho está vazio.";
         }
+
+        carrinhoCRUD.atualizarValorTotal();
         
         StringBuilder resultado = new StringBuilder("\n==== Itens no Carrinho ====\n");
         for (ItemCarrinho item : itensCarrinho) {

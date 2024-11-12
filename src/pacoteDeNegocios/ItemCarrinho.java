@@ -2,8 +2,8 @@ package pacoteDeNegocios;
 
 public class ItemCarrinho extends ProdutoBase {
     private final Produto produto;
-    private final int quantidade;
-    private final double subtotal;
+    private int quantidade;
+    private double subtotal;
 
     public ItemCarrinho(Produto produto, int quantidade) {
         super(produto.getId(), produto.getNome());
@@ -27,5 +27,14 @@ public class ItemCarrinho extends ProdutoBase {
 
     public double getSubtotal() {
         return subtotal;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+        atualizarSubtotal();
+    }
+
+    private void atualizarSubtotal() {
+        this.subtotal = produto.getPreco() * quantidade;
     }
 }

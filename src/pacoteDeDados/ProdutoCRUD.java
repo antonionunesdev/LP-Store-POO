@@ -38,7 +38,7 @@ public class ProdutoCRUD {
     public void atualizarEstoqueProduto(int id, int novaQuantidadeEstoque) {
         for (Produto produto : produtos) {
             if (produto.getId() == id) {
-                produto.setEstoque(novaQuantidadeEstoque);
+                produto.setQuantidadeEstoque(novaQuantidadeEstoque);
                 break;
             }
         }
