@@ -3,6 +3,7 @@ package pacoteDeDados;
 import java.util.ArrayList;
 import java.util.List;
 import pacoteDeNegocios.Carrinho;
+import pacoteDeNegocios.Cliente;
 import pacoteDeNegocios.Pedido;
 
 public class PedidoCRUD {
@@ -12,9 +13,9 @@ public class PedidoCRUD {
         this.pedidos = new ArrayList<>();
     }
 
-    public Pedido criarPedido(Carrinho carrinho) {
+    public Pedido criarPedido(Cliente cliente, Carrinho carrinho) {
         int novoId = pedidos.size() + 1;
-        Pedido novoPedido = new Pedido(novoId, carrinho.getItens(), carrinho.getValorTotal());
+        Pedido novoPedido = new Pedido(cliente, novoId, carrinho.getItens(), carrinho.getValorTotal());
         pedidos.add(novoPedido);
         return novoPedido;
     }

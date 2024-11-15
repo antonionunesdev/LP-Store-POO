@@ -1,5 +1,6 @@
 package pacoteDeInterface;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import pacoteDeNegocios.Cliente;
 import pacoteDeNegocios.FachadaLoja;
@@ -40,9 +41,20 @@ public class Main {
                 System.out.println("3. Cadastrar Gerente");
                 System.out.println("4. Acessar como Gerente");
                 System.out.println("5. Sair");
-                System.out.print("\nEscolha uma opção: ");
-                int opcao = scanner.nextInt();
-                scanner.nextLine();
+                int opcao = -1;
+                boolean opcaoValida = false;
+
+                while (!opcaoValida) {
+                    try {
+                        System.out.print("\nEscolha uma opção: ");
+                        opcao = scanner.nextInt();
+                        scanner.nextLine();
+                        opcaoValida = true;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Opção inválida. Por gentileza, digite um número de 1 a 5.");
+                        scanner.nextLine();
+                    }
+                }
 
                 switch (opcao) {
                     case 1 -> {
@@ -59,10 +71,21 @@ public class Main {
                         try {
                             System.out.print("Digite o nome do cliente: ");
                             String nomeParaBuscar = scanner.nextLine();
-                            System.out.print("Digite o ID do cliente: ");
-                            int idParaBuscar = scanner.nextInt();
-                            scanner.nextLine();
+                            int idParaBuscar = -1;
+                            boolean idValido = false;
 
+                            while (!idValido) {
+                                try {
+                                    System.out.print("Digite o ID do cliente: ");
+                                    idParaBuscar = scanner.nextInt();
+                                    scanner.nextLine();
+                                    idValido = true;
+                                } catch (InputMismatchException e) {
+                                    System.out.println("ID inválido. Por gentileza, digite um número inteiro.");
+                                    scanner.nextLine();
+                                }
+                            }
+                            
                             clienteAtual = fachadaLoja.buscarClientePorId(idParaBuscar);
 
                             if (clienteAtual == null || !clienteAtual.getNome().equalsIgnoreCase(nomeParaBuscar)) {
@@ -79,7 +102,7 @@ public class Main {
                                     boolean clienteContinuar = true;
                                     while (clienteContinuar) {
                                         System.out.println("\n==== Menu Cliente ====");
-                                        System.out.println("1. Ver Produtos");
+                                        System.out.println("1. Listar Produtos");
                                         System.out.println("2. Adicionar Produto ao Carrinho");
                                         System.out.println("3. Remover Produto do Carrinho");
                                         System.out.println("4. Ver Carrinho");
@@ -87,9 +110,20 @@ public class Main {
                                         System.out.println("6. Ordenar Produtos por Preço");
                                         System.out.println("7. Finalizar Compra");
                                         System.out.println("8. Voltar ao Menu Principal");
-                                        System.out.print("\nEscolha uma opção: ");
-                                        int clienteOpcao = scanner.nextInt();
-                                        scanner.nextLine();
+                                        int clienteOpcao = -1;
+                                        boolean clienteOpcaoValida = false;
+
+                                        while (!clienteOpcaoValida) {
+                                            try {
+                                                System.out.print("\nEscolha uma opção: ");
+                                                clienteOpcao = scanner.nextInt();
+                                                scanner.nextLine();
+                                                clienteOpcaoValida = true;
+                                            } catch (InputMismatchException e) {
+                                                System.out.println("Opção inválida. Por gentileza, digite um número de 1 a 8.");
+                                                scanner.nextLine();
+                                            }
+                                        }
 
                                         switch (clienteOpcao) {
                                             case 1 -> {
@@ -99,9 +133,20 @@ public class Main {
                                             case 2 -> {
                                                     System.out.print("Digite o nome do produto que deseja adicionar: ");
                                                     String nomeProduto = scanner.nextLine();
-                                                    System.out.print("Digite a quantidade: ");
-                                                    int quantidade = scanner.nextInt();
-                                                    scanner.nextLine();
+                                                    int quantidade = -1;
+                                                    boolean quantidadeValida = false;
+
+                                                    while (!quantidadeValida) {
+                                                        try {
+                                                            System.out.print("Digite a quantidade: ");
+                                                            quantidade = scanner.nextInt();
+                                                            scanner.nextLine();
+                                                            quantidadeValida = true;
+                                                        } catch (InputMismatchException e) {
+                                                            System.out.println("Quantidade inválida. Por favor, digite um número inteiro.");
+                                                            scanner.nextLine();
+                                                        }
+                                                    }
                                             
                                                     System.out.println(fachadaLoja.adicionarItem(nomeProduto, quantidade));
                                             }
@@ -189,22 +234,59 @@ public class Main {
                                     System.out.println("8. Visualizar Última Venda");
                                     System.out.println("9. Visualizar Todas Vendas");
                                     System.out.println("10. Voltar ao Menu Principal");
-                                    System.out.print("\nEscolha uma opção: ");
-                                    int gerenteOpcao = scanner.nextInt();
-                                    scanner.nextLine();
+                                    int gerenteOpcao = -1;
+                                    boolean gerenteOpcaoValida = false;
+
+                                    while (!gerenteOpcaoValida) {
+                                        try {
+                                            System.out.print("\nEscolha uma opção: ");
+                                            gerenteOpcao = scanner.nextInt();
+                                            scanner.nextLine();
+                                            gerenteOpcaoValida = true;
+                                        } catch (InputMismatchException e) {
+                                            System.out.println("Opção inválida. Por gentileza, digite um número de 1 a 10.");
+                                            scanner.nextLine();
+                                        }
+                                    }
 
                                     switch (gerenteOpcao) {
                                         case 1 -> {
                                             System.out.print("Digite o nome do produto: ");
                                             String nome = scanner.nextLine();
-                                            System.out.print("Digite o preço do produto: ");
-                                            double preco = scanner.nextDouble();
-                                            scanner.nextLine();
+
+                                            double preco = -1;
+                                            boolean precoValido = false;
+
+                                            while (!precoValido) {
+                                                try {
+                                                    System.out.print("Digite o preço do produto: ");
+                                                    preco = scanner.nextDouble();
+                                                    scanner.nextLine();
+                                                    precoValido = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("Preço inválido. Por gentileza, digite um número inteiro ou decimal.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
+                                            
                                             System.out.print("Digite a categoria do produto: ");
                                             String categoria = scanner.nextLine();
-                                            System.out.print("Digite o estoque do produto: ");
-                                            int quantidadeEstoque = scanner.nextInt();
-                                            scanner.nextLine();
+
+                                            int quantidadeEstoque = -1;
+                                            boolean quantidadeEstoqueValida = false;
+
+                                            while (!quantidadeEstoqueValida) {
+                                                try {
+                                                    System.out.print("Digite o estoque do produto: ");
+                                                    quantidadeEstoque = scanner.nextInt();
+                                                    scanner.nextLine();
+                                                    quantidadeEstoqueValida = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("Quantidade inválida. Por gentileza, digite um número inteiro.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
+                                            
                                             System.out.print("Digite a descrição do produto: ");
                                             String descricao = scanner.nextLine();
 
@@ -216,25 +298,87 @@ public class Main {
                                         }
 
                                         case 2 -> {
-                                            System.out.print("Digite o ID do produto a ser removido: ");
-                                            int idProduto = scanner.nextInt();
+                                            int idProduto = -1;
+                                            boolean idProdutoValido = false;
+
+                                            while (!idProdutoValido) {
+                                                try {
+                                                    System.out.print("Digite o ID do produto a ser removido: ");
+                                                    idProduto = scanner.nextInt();
+                                                    scanner.nextLine();
+                                                    idProdutoValido = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("ID inválido. Por gentileza, digite um número inteiro.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
                                             System.out.println(fachadaLoja.removerProduto(idProduto));
                                         }
 
                                         case 3 -> {
-                                            System.out.print("Digite o ID do produto para atualizar o seu preço: ");
-                                            int idProduto = scanner.nextInt();
-                                            System.out.print("Digite o novo preço do produto: ");
-                                            double novoPreco = scanner.nextDouble();
+                                            int idProduto = -1;
+                                            boolean idProdutoValido = false;
+
+                                            while (!idProdutoValido) {
+                                                try {
+                                                    System.out.print("Digite o ID do produto para atualizar o seu preço: ");
+                                                    idProduto = scanner.nextInt();
+                                                    scanner.nextLine();
+                                                    idProdutoValido = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("ID inválido. Por gentileza, digite um número inteiro.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
+                                            
+                                            double novoPreco = -1;
+                                            boolean novoPrecoValido = false;
+
+                                            while (!novoPrecoValido) {
+                                                try {
+                                                    System.out.print("Digite o novo preço do produto: ");
+                                                    novoPreco = scanner.nextDouble();
+                                                    scanner.nextLine();
+                                                    novoPrecoValido = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("Novo preço inválido. Por gentileza, digite um número inteiro.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
                                             System.out.println(fachadaLoja.atualizarPrecoProduto(idProduto, novoPreco));
                                         }
 
                                         case 4 -> {
-                                            System.out.print("Digite o ID do produto para atualizar o seu estoque: ");
-                                            int idProduto = scanner.nextInt();
-                                            System.out.print("Digite a nova quantidade em estoque: ");
-                                            double novaQuantidadeEstoque = scanner.nextDouble();
-                                            System.out.println(fachadaLoja.atualizarPrecoProduto(idProduto, novaQuantidadeEstoque));
+                                            int idProduto = -1;
+                                            boolean idProdutoValido = false;
+
+                                            while (!idProdutoValido) {
+                                                try {
+                                                    System.out.print("Digite o ID do produto para atualizar o seu estoque: ");
+                                                    idProduto = scanner.nextInt();
+                                                    scanner.nextLine();
+                                                    idProdutoValido = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("ID inválido. Por gentileza, digite um número inteiro ou decimal.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
+                                            
+                                            int novaQuantidadeEstoque = -1;
+                                            boolean novaQuantidadeEstoqueInvalida = false;
+
+                                            while (!novaQuantidadeEstoqueInvalida) {
+                                                try {
+                                                    System.out.print("Digite a nova quantidade em estoque: ");
+                                                    novaQuantidadeEstoque = scanner.nextInt();
+                                                    scanner.nextLine();
+                                                    novaQuantidadeEstoqueInvalida = true;
+                                                } catch (InputMismatchException e) {
+                                                    System.out.println("Nova quantidade em estoque inválida. Por gentileza, digite um número inteiro.");
+                                                    scanner.nextLine();
+                                                }
+                                            }
+                                            System.out.println(fachadaLoja.atualizarEstoqueProduto(idProduto, novaQuantidadeEstoque));
                                         }
 
                                         case 5 -> {

@@ -115,9 +115,9 @@ public class FachadaLoja {
         } else {
             carrinhoCRUD.atualizarValorTotal();
 
-            Pedido novoPedido = criarPedido();
+            Pedido novoPedido = criarPedido(clienteAtual);
             System.out.println("\n====Pedido criado====\n" + novoPedido);
-            System.out.println("Compra finalizada por " + clienteAtual.getNome() + ".\nTotal: R$ " + calcularTotal());
+            System.out.println("\nCompra finalizada por " + clienteAtual.getNome() + ".\nTotal: R$ " + calcularTotal());
             
             carrinhoCRUD = new CarrinhoCRUD();
         }
@@ -181,8 +181,8 @@ public class FachadaLoja {
     }
 
     // Operações relacionadas ao pedido
-    public Pedido criarPedido() {
-        return pedidoCRUD.criarPedido(carrinhoCRUD.getCarrinho());
+    public Pedido criarPedido(Cliente clienteAtual) {
+        return pedidoCRUD.criarPedido(clienteAtual, carrinhoCRUD.getCarrinho());
     }
 
     public String visualizarUltimaVenda() {
