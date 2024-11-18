@@ -97,7 +97,7 @@ public class Main {
                                 if (clienteAtual.validarSenha(senha)) {
                                     ultimaPessoaLogada = clienteAtual;
                                     System.out.println("\nLogin efetuado com sucesso!");
-                                    System.out.println("\nCliente selecionado: " + clienteAtual.getNome() + ", ID: " + clienteAtual.getId());
+                                    System.out.println("Cliente selecionado: " + clienteAtual.getNome() + ", ID: " + clienteAtual.getId());
 
                                     boolean clienteContinuar = true;
                                     while (clienteContinuar) {

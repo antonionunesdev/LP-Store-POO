@@ -172,11 +172,11 @@ public class FachadaLoja {
 
         carrinhoCRUD.atualizarValorTotal();
         
-        StringBuilder resultado = new StringBuilder("\n==== Itens no Carrinho ====\n");
+        StringBuilder resultado = new StringBuilder("\n==== Itens no Carrinho ====");
         for (ItemCarrinho item : itensCarrinho) {
-            resultado.append(item).append("\n");
+            resultado.append("\n").append(item);
         }
-        resultado.append("Total: R$ ").append(carrinhoCRUD.calcularTotal());
+        resultado.append("\nTotal: R$ ").append(carrinhoCRUD.calcularTotal());
         return resultado.toString();
     }
 
