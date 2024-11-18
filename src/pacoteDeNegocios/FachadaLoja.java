@@ -71,9 +71,9 @@ public class FachadaLoja {
             return "\nNão há produtos na categoria '" + categoria + "'.";
         }
         
-        StringBuilder resultado = new StringBuilder("\n==== Produtos na Categoria '" + categoria + "' ====\n");
+        StringBuilder resultado = new StringBuilder("\n==== Produtos na Categoria '" + categoria + "' ====");
         for (Produto produto : produtosFiltrados) {
-            resultado.append(produto).append("\n");
+            resultado.append("\n").append(produto);
         }
         return resultado.toString();
     }
@@ -85,9 +85,9 @@ public class FachadaLoja {
             return "\nNão há produtos disponíveis para ordenar.";
         }
         
-        StringBuilder produtosOrdenados = new StringBuilder("\n==== Produtos Ordenados por Preço ====\n");
+        StringBuilder produtosOrdenados = new StringBuilder("\n==== Produtos Ordenados por Preço ====");
         for (Produto produto : produtos) {
-            produtosOrdenados.append(produto).append("\n");
+            produtosOrdenados.append("\n").append(produto);
         }
         return produtosOrdenados.toString();
     }
